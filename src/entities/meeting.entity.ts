@@ -5,19 +5,19 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
-import { User } from "./user.entity";
-import { Event } from "./event.entity";
-import { IntegrationAppTypeEnum } from "./integration.entity";
+} from 'typeorm';
+
+import { Event } from './event.entity';
+import { User } from './user.entity';
 
 export enum MeetingStatus {
-  SCHEDULED = "SCHEDULED",
-  CANCELLED = "CANCELLED",
+  SCHEDULED = 'SCHEDULED',
+  CANCELLED = 'CANCELLED',
 }
 
-@Entity({ name: "meetings" })
+@Entity({ name: 'meetings' })
 export class Meeting {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ManyToOne(() => User, (user) => user.meetings)
@@ -51,7 +51,7 @@ export class Meeting {
   calendarAppType: string;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: MeetingStatus,
     default: MeetingStatus.SCHEDULED,
   })

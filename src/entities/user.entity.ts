@@ -9,16 +9,16 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
-import { compareValue, hashValue } from "../../utils/bcrypt";
-import { Integration } from "./integration.entity";
-import { Event } from "./event.entity";
-import { Availability } from "./availability.entity";
-import { Meeting } from "./meeting.entity";
+} from 'typeorm';
+import { compareValue, hashValue } from '../../utils/bcrypt';
+import { Event } from './event.entity';
+import { Integration } from './integration.entity';
+import { Availability } from './availability.entity';
+import { Meeting } from './meeting.entity';
 
-@Entity({ name: "users" })
+@Entity()
 export class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ nullable: false })
@@ -75,8 +75,8 @@ export class User {
     return compareValue(candidatePassword, this.password);
   }
 
-  omitPassword(): Omit<User, "password"> {
+  omitPassword(): Omit<User, 'password'> {
     const { password, ...userWithoutPassword } = this;
-    return userWithoutPassword as Omit<User, "password">;
+    return userWithoutPassword as Omit<User, 'password'>;
   }
 }

@@ -6,19 +6,18 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
-import { IntegrationAppTypeEnum } from "./integration.entity";
-import { User } from "./user.entity";
-import { Meeting } from "./meeting.entity";
-
+} from 'typeorm';
+import { User } from './user.entity';
+import { Meeting } from './meeting.entity';
+import { IntegrationAppTypeEnum } from './integration.entity';
 export enum EventLocationEnumType {
   GOOGLE_MEET_AND_CALENDAR = IntegrationAppTypeEnum.GOOGLE_MEET_AND_CALENDAR,
   ZOOM_MEETING = IntegrationAppTypeEnum.ZOOM_MEETING,
 }
 
-@Entity({ name: "events" })
+@Entity({ name: 'events' })
 export class Event {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ nullable: false })
@@ -36,7 +35,7 @@ export class Event {
   @Column({ default: false })
   isPrivate: boolean;
 
-  @Column({ type: "enum", enum: EventLocationEnumType })
+  @Column({ type: 'enum', enum: EventLocationEnumType })
   locationType: EventLocationEnumType;
 
   @ManyToOne(() => User, (user) => user.events)

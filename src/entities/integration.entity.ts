@@ -6,25 +6,26 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
-import { User } from "./user.entity";
+} from 'typeorm';
+
+import { User } from './user.entity';
 
 export enum IntegrationProviderEnum {
-  GOOGLE = "GOOGLE",
-  ZOOM = "ZOOM",
-  MICROSOFT = "MICROSOFT",
+  GOOGLE = 'GOOGLE',
+  ZOOM = 'ZOOM',
+  MICROSOFT = 'MICROSOFT',
 }
 
 export enum IntegrationAppTypeEnum {
-  GOOGLE_MEET_AND_CALENDAR = "GOOGLE_MEET_AND_CALENDAR",
-  ZOOM_MEETING = "ZOOM_MEETING",
-  OUTLOOK_CALENDAR = "OUTLOOK_CALENDAR",
+  GOOGLE_MEET_AND_CALENDAR = 'GOOGLE_MEET_AND_CALENDAR',
+  ZOOM_MEETING = 'ZOOM_MEETING',
+  OUTLOOK_CALENDAR = 'OUTLOOK_CALENDAR',
 }
 
 export enum IntegrationCategoryEnum {
-  CALENDAR_AND_VIDEO_CONFERENCING = "CALENDAR_AND_VIDEO_CONFERENCING",
-  VIDEO_CONFERENCING = "VIDEO_CONFERENCING",
-  CALENDAR = "CALENDAR",
+  CALENDAR_AND_VIDEO_CONFERENCING = 'CALENDAR_AND_VIDEO_CONFERENCING',
+  VIDEO_CONFERENCING = 'VIDEO_CONFERENCING',
+  CALENDAR = 'CALENDAR',
 }
 
 interface GoogleMeetAndCalendarMetadata {
@@ -36,18 +37,18 @@ interface ZoomMetadata {}
 
 type IntegrationMetadata = GoogleMeetAndCalendarMetadata | ZoomMetadata;
 
-@Entity({ name: "integrations" })
+@Entity({ name: 'integrations' })
 export class Integration {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: "enum", enum: IntegrationProviderEnum })
+  @Column({ type: 'enum', enum: IntegrationProviderEnum })
   provider: IntegrationProviderEnum;
 
-  @Column({ type: "enum", enum: IntegrationCategoryEnum })
+  @Column({ type: 'enum', enum: IntegrationCategoryEnum })
   category: IntegrationCategoryEnum;
 
-  @Column({ type: "enum", enum: IntegrationAppTypeEnum })
+  @Column({ type: 'enum', enum: IntegrationAppTypeEnum })
   app_type: IntegrationAppTypeEnum;
 
   @Column()
@@ -56,10 +57,10 @@ export class Integration {
   @Column({ nullable: true })
   refresh_token: string;
 
-  @Column({ type: "bigint", nullable: true })
+  @Column({ type: 'bigint', nullable: true })
   expiry_date: number | null;
 
-  @Column({ type: "json" })
+  @Column({ type: 'json' })
   metadata: IntegrationMetadata;
 
   @Column({ default: true })
@@ -69,7 +70,7 @@ export class Integration {
   userId: string;
 
   @ManyToOne(() => User, (user) => user.integrations)
-  @JoinColumn({ name: "userId" })
+  @JoinColumn({ name: 'userId' })
   user: User;
 
   @CreateDateColumn()
