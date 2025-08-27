@@ -9,14 +9,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Post()
-  createUser(@Body() body: any) {
-    return this.appService.createUser(body.name, body.place);
-  }
-
-  @Get('users')
-  getUsers() {
-    return this.appService.getUsers();
-  }
 }
