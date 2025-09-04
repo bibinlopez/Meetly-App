@@ -27,4 +27,8 @@ export class AuthService {
 
     return { acceess_token: this.jwtService.sign(payload) };
   }
+
+  async register(user) {
+    return this.userService.create(user);
+  }
 }
